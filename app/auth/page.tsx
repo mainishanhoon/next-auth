@@ -4,27 +4,35 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import GitHubSignIn from "@/components/GitHubSignIn";
-import SignInForm from "@/components/SignInForm";
+} from '@/components/ui/card';
+import GitHubSignIn from '@/components/GitHubSignIn';
+import SignInForm from '@/components/SignInForm';
 
 export default function AuthRoute() {
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <Card>
-        <CardHeader>
-          <CardTitle>Sign In</CardTitle>
-          <CardDescription>
-            To access the private page you have to be authenticated
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col">
-            <SignInForm />
-            <GitHubSignIn />
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="text-center text-2xl">Sign In</CardTitle>
+        <CardDescription className="text-center">
+          Access the private page with authentication
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-6">
+          <SignInForm />
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Or continue with
+              </span>
+            </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+          <GitHubSignIn />
+        </div>
+      </CardContent>
+    </Card>
   );
 }

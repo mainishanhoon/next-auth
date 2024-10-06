@@ -1,20 +1,34 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { GithubIcon } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { Button } from '@/components/ui/button';
+import { GithubIcon } from 'lucide-react';
+import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function GitHubSignIn() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setIsLoading(true);
+    await signIn('github', { callbackUrl: `${window.location.origin}` });
+    setIsLoading(false);
+  };
+
   return (
     <Button
-      onClick={() =>
-        signIn("github", { callbackUrl: `${window.location.origin}` })
-      }
-      className="mt-6"
-      variant="secondary"
+      onClick={handleSignIn}
+      className="w-full"
+      variant="outline"
+      disabled={isLoading}
     >
-      Login with GitHub
-      <GithubIcon className="size-4 ml-4" />
+      {isLoading ? (
+        'Signing in...'
+      ) : (
+        <>
+          <GithubIcon className="mr-2 h-4 w-4" />
+          Sign in with GitHub
+        </>
+      )}
     </Button>
   );
 }
